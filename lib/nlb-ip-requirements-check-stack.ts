@@ -22,5 +22,16 @@ export class NlbIpRequirementsCheckStack extends Stack {
         },
       ],
     })
+
+    const cfnPublicSubnet1 = vpc.publicSubnets[0].node.defaultChild as ec2.CfnSubnet
+    cfnPublicSubnet1.addPropertyOverride('CidrBlock', `10.1.0.0/28`)
+    const cfnPublicSubnet2 = vpc.publicSubnets[1].node.defaultChild as ec2.CfnSubnet
+    cfnPublicSubnet2.addPropertyOverride('CidrBlock', `10.1.1.0/28`)
+    /*
+    const cfnPrivateSubnet1 = vpc.privateSubnets[0].node.defaultChild as ec2.CfnSubnet
+    cfnPrivateSubnet1.addPropertyOverride('CidrBlock', `10.1.2.0/28`)
+    const cfnPrivateSubnet2 = vpc.privateSubnets[1].node.defaultChild as ec2.CfnSubnet
+    cfnPrivateSubnet2.addPropertyOverride('CidrBlock', `10.1.3.0/28`)
+    */
   }
 }
