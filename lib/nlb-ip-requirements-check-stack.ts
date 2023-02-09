@@ -52,7 +52,7 @@ export class NlbIpRequirementsCheckStack extends Stack {
     });
 
     // (Session Mangerを使うための)IAMロール
-    const instanceRole = new iam.Role(this, 'SampleRole', {
+    const instanceRole = new iam.Role(this, 'ssmIAMRole', {
       assumedBy: new iam.ServicePrincipal('ec2.amazonaws.com'),
       managedPolicies: [
         iam.ManagedPolicy.fromAwsManagedPolicyName(
@@ -80,7 +80,6 @@ export class NlbIpRequirementsCheckStack extends Stack {
     const instance1 = createInstance('SampleInstance1', 'cdk-vpc-ec2-instance1', vpc.selectSubnets({
       subnetType: ec2.SubnetType.PRIVATE_ISOLATED
     }));
-
     const instance2 = createInstance('SampleInstance2', 'cdk-vpc-ec2-instance2', vpc.selectSubnets({
       subnetType: ec2.SubnetType.PRIVATE_ISOLATED
     }));
