@@ -36,6 +36,8 @@
     "@aws-cdk/aws-events:eventsTargetQueueSameAccount": true,
     "@aws-cdk/aws-iam:standardizedServicePrincipals": true,
     "@aws-cdk/aws-ecs:disableExplicitDeploymentControllerForCircuitBreaker": true,
-    "@aws-cdk/core:newStyleStackSynthesis": true
+    "@aws-cdk/core:newStyleStackSynthesis": true,
+
+    "instanceType":"t2.micro"
   }
 }
