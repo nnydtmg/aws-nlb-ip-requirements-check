@@ -34,16 +34,6 @@ export class NlbIpRequirementsCheckStack extends Stack {
     
     /*const cfnPublicSubnet1 = vpc.publicSubnets[0].node.defaultChild as ec2.CfnSubnet
     cfnPublicSubnet1.addPropertyOverride('CidrBlock', `10.1.0.0/28`)
-    const cfnPublicSubnet2 = vpc.publicSubnets[1].node.defaultChild as ec2.CfnSubnet
-    cfnPublicSubnet2.addPropertyOverride('CidrBlock', `10.1.1.0/28`)
-    const cfnPublicSubnet3 = vpc.publicSubnets[2].node.defaultChild as ec2.CfnSubnet
-    cfnPublicSubnet3.addPropertyOverride('CidrBlock', `10.1.2.0/28`)
-    */
-    /*
-    const cfnPrivateSubnet1 = vpc.privateSubnets[0].node.defaultChild as ec2.CfnSubnet
-    cfnPrivateSubnet1.addPropertyOverride('CidrBlock', `10.1.2.0/28`)
-    const cfnPrivateSubnet2 = vpc.privateSubnets[1].node.defaultChild as ec2.CfnSubnet
-    cfnPrivateSubnet2.addPropertyOverride('CidrBlock', `10.1.3.0/28`)
     */
     // セキュリティグループ
     const securityGroup = new ec2.SecurityGroup(this, 'SampleSecurityGroup', {
@@ -78,23 +68,49 @@ export class NlbIpRequirementsCheckStack extends Stack {
     };
 
     const instance1 = createInstance('SampleInstance1', 'cdk-vpc-ec2-instance1', vpc.selectSubnets({
-      subnetType: ec2.SubnetType.PRIVATE_ISOLATED
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1a']
     }));
     const instance2 = createInstance('SampleInstance2', 'cdk-vpc-ec2-instance2', vpc.selectSubnets({
-      subnetType: ec2.SubnetType.PRIVATE_ISOLATED
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1c']
+    }));
+    const instance3 = createInstance('SampleInstance3', 'cdk-vpc-ec2-instance3', vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1a']
+    }));
+    const instance4 = createInstance('SampleInstance4', 'cdk-vpc-ec2-instance4', vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1c']
+    }));
+    const instance5 = createInstance('SampleInstance5', 'cdk-vpc-ec2-instance5', vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1a']
+    }));
+    const instance6 = createInstance('SampleInstance6', 'cdk-vpc-ec2-instance6', vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1c']
+    }));const instance7 = createInstance('SampleInstance7', 'cdk-vpc-ec2-instance7', vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1a']
+    }));
+    const instance8 = createInstance('SampleInstance8', 'cdk-vpc-ec2-instance8', vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1c']
+    }));const instance9 = createInstance('SampleInstance9', 'cdk-vpc-ec2-instance9', vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1a']
+    }));
+    const instance10 = createInstance('SampleInstance10', 'cdk-vpc-ec2-instance10', vpc.selectSubnets({
+      subnetType: ec2.SubnetType.PRIVATE_ISOLATED,
+      availabilityZones:['ap-northeast-1c']
     }));
 
 
      // CloudFormationに出力
-     // new CfnOutput(this, 'S3', { value: bucket.bucketName });
-     new CfnOutput(this, 'VPC', { value: vpc.vpcId });
+     // new CfnOutput(this, 'VPC', { value: vpc.vpcId });
      // new CfnOutput(this, 'PublicSubnet1', { value: vpc.publicSubnets[0].subnetId });
-     // new CfnOutput(this, 'PublicSubnet2', { value: vpc.publicSubnets[1].subnetId });
-     // new CfnOutput(this, 'PublicSubnet3', { value: vpc.publicSubnets[2].subnetId });
-     // new CfnOutput(this, 'PrivateSubnet1', { value: vpc.privateSubnets[0].subnetId });
-     // new CfnOutput(this, 'PrivateSubnet2', { value: vpc.privateSubnets[1].subnetId });
      // new CfnOutput(this, 'Security Group', { value: securityGroup.securityGroupId });
      // new CfnOutput(this, 'EC2Instance1', { value: instance1.instanceId });
-     // new CfnOutput(this, 'EC2Instance2', { value: instance2.instanceId });
   }
 }
