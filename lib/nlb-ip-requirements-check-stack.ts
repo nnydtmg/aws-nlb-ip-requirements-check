@@ -9,7 +9,7 @@ export class NlbIpRequirementsCheckStack extends Stack {
     super(scope, id, props)
 
     const vpc = new ec2.Vpc(this, 'nlbVPC', {
-      cidr: '10.1.0.0/16',
+      ipAddresses: ec2.IpAddresses.cidr('10.1.0.0/16'),
       maxAzs: 3,
       enableDnsHostnames: true,
       enableDnsSupport: true,
@@ -58,9 +58,8 @@ export class NlbIpRequirementsCheckStack extends Stack {
         vpc,
         vpcSubnets: subnet,
         instanceType: new ec2.InstanceType(this.node.tryGetContext('instanceType')),
-        machineImage: ec2.MachineImage.latestAmazonLinux({
-          generation: ec2.AmazonLinuxGeneration.AMAZON_LINUX_2,
-        }),
+        // Amazon Linux 2 はサポート終了のため Amazon Linux 2023 を使う
+        machineImage: ec2.MachineImage.latestAmazonLinux2023(),
         securityGroup: securityGroup,
         role: instanceRole,
         instanceName: name
